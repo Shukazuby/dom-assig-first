@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        margin: 1rem;
+      }
+      #teamForm {
+        text-align: left;
+        padding: 5px;
+      }
+
+      .inputDetails {
+        margin: 1rem auto;
+      }
+      .inputDetails input {
+        padding: 10px;
+        width: 20%;
+        border: 0.5px solid black;
+        outline: none;
+      }
+      .config > input {
+        display: block;
+        width: 20%;
+        margin: 10px;
+      }
+      input[type="submit"] {
+        padding: 10px;
+        border-radius: 2px;
+        outline: none;
+        border: none;
+        box-shadow: 0 0 2px #444;
+      }
+      input[type="number"] {
+        padding: 0.5rem;
+        width: 10%;
+      }
+        input[type="color"] {
+        padding: 2px;
+        width: 10%;
+      }
+      #teamTable{
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <h1>Team Form</h1>
+      <!-- Inventory entry form -->
+      <form name="inventoryForm" onsubmit="addItem(event)" id="teamForm">
+        <div class="inputDetails">
+          <input type="text" name="name" id="name" placeholder="Enter your full name"/>
+        </div>
+        <div class="inputDetails">
+          <input type="text" name="team" id="team" placeholder="Your Team"/>
+        </div>
+        <div class="inputDetails">
+          <input
+            type="text" name="number" id="number" placeholder="Phone Number"/>
+        </div>
+        <input type="submit" value="Submit" />
+      </form>
+
+
+      <!-- Theme and Width Setting -->
+      <div class="config">
+        <label for="colors">Choose your color and table width</label>
+        <input type="color" name="colors" id="colors" />
+        <input type="number" name="width" id="width" min="500" max="1000" />
+        <input type="submit" value="Set Theme & Width" id="b-theme" />
+      </div>
+    </div>
+
+    <div class="row">
+      <h1>Team Table</h1>
+      <!-- Team table -->
+      <table id="teamTable">
+        <thead>
+          <th>Name</th>
+          <th>Team</th>
+          <th>Phone number</th>
+        </thead>
+      </table>
+    </div>
+
+    <script>
+let buttonTheme = document.querySelector("#b-theme");
+let teamTable = document.querySelector("#teamTable");
+let colorPallet = document.querySelector("#colors");
+let widthSize = document.querySelector("#width");
+
+buttonTheme.addEventListener("click", (e) => {
+  e.preventDefault();
+  let userColor = colorPallet.value;
+  teamTable.style.backgroundColor = userColor;
+  teamTable.style.color = "#fff";
+  teamTable.style.width = `${parseInt(widthSize.value)}px`;
+  document.querySelector("#teamForm").reset();
+});
+
+let addItem = function (e) {
+  e.preventDefault();
+  let teamList = document.forms["teamForm"];
+  let formData = new FormData(teamList);
+
+  //   let inventoryTable = document.getElementById("name");
+  let row = teamTable.insertRow();
+  //   row.insertCell.innerHTML = formData.get('name');
+
+  for (let [key, value] of formData) {
+    row.insertCell().innerHTML = formData.get(key);
+    // console.log(key, value);
+  }
+};
+
+    </script>
+  </body>
+</html>
