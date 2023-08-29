@@ -112,13 +112,10 @@ let addItem = function (e) {
   let teamList = document.forms["teamForm"];
   let formData = new FormData(teamList);
 
-  //   let inventoryTable = document.getElementById("name");
   let row = teamTable.insertRow();
-  //   row.insertCell.innerHTML = formData.get('name');
 
   for (let [key, value] of formData) {
     row.insertCell().innerHTML = formData.get(key);
-    // console.log(key, value);
   }
 };
 
